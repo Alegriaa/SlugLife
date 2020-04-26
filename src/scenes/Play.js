@@ -39,14 +39,14 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
             runChildUpdate: true    // make sure update runs on group children
         });
 
-        this.platformsPhysics = this.add.physicsGroup();
-        this.groundPhysics = this.add.physicsGroup();
+       // this.platformsPhysics = this.add.physicsGroup();
+        //this.groundPhysics = this.add.physicsGroup();
 
 
-        this.platformsPhysics.setAll('body.allowGravity', false);
-        this.platformsPhysics.setAll('body.immovable', true);
-        this.groundPhysics.setAll('body.allowGravity', false);
-        this.groundPhysics.setAll('body.immovable', true);
+        //this.platformsPhysics.setAll('body.allowGravity', false);
+       // this.platformsPhysics.setAll('body.immovable', true);
+        //this.groundPhysics.setAll('body.allowGravity', false);
+        //this.groundPhysics.setAll('body.immovable', true);
         
         this.add.text(centerX, centerY, 'SLUG LIFE PLAY SCENE', playConfig).setOrigin(0.5);  
         
@@ -57,7 +57,7 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
          }, null, this); 
 
         this.ground1 = new Ground(this, 100 , 500, 'platform', 0).setScale(15, .5).setOrigin(0, 0);//spawn starting platform
-    }
+    
 
 
 
@@ -82,7 +82,7 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
 
         this.physics.add.collider(this.virus, this.ground);
 
-
+        }
 addPlatform() {
 
     this.skinDesider = Math.floor(Math.random() * 3) + 1; //picks a random number between 1-3, uses this number to pick a skin for the platform
@@ -99,7 +99,7 @@ addPlatform() {
     }
         
     this.platformGroup.add(this.platform); // add it to existing group
-    this.platformsPhysics.add(this.platform);
+    //this.platformsPhysics.add(this.platform);
 }
 
 addGround() {
@@ -119,7 +119,7 @@ addGround() {
     }
         
     this.groundGroup.add(this.ground);  // add it to existing group
-    this.groundPhysics.add(this.platform);
+    //this.groundPhysics.add(this.platform);
 }
 
 

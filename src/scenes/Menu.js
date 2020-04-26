@@ -24,7 +24,7 @@ class Menu extends Phaser.Scene {
 
         }
 
-        this.add.text(centerX, centerY, 'SLUG LIFE', menuConfig).setOrigin(0.5);
+        this.add.text(centerX, centerY, 'SLUG LIFE111111', menuConfig).setOrigin(0.5);
         keyL = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.L);
         keyJ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J);
 
