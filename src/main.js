@@ -5,7 +5,7 @@ let config = {
     height: 640,
     width: 960,
     scale: {
-        autoCenter: Phaser.Scale.CENTER_BOTH
+        autoCenter: Phaser.Scale.CENTER_BOTH  
     },
     physics: {
         default: 'arcade',
@@ -22,11 +22,21 @@ let config = {
 
 let game = new Phaser.Game(config);
 
+
+let keyL, keyJ;
+
 game.settings = {
     platformSpeed: 4,//this is the number that the platforms and ground are connected to, we could also seperate them into diff values easily
       
 }
 
+
 let centerX = game.config.width/2;
 let centerY = game.config.height/2;
-let keyL;
+let virus = null;
+let ground = null;
+let cursors = null;
+const virusWidth = 40;
+const virusHeight = 80;
+const virusVelocity = 100;
+

@@ -58,9 +58,31 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
 
         this.ground1 = new Ground(this, 100 , 500, 'platform', 0).setScale(15, .5).setOrigin(0, 0);//spawn starting platform
     }
-    update(){
-        this.ground1.update();//necessary for the starting platform to move idk
-        }
+
+
+
+        this.power = 0;
+        this.add.text(centerX, centerY - textSpacer * 4, 'SLUG LIFE PLAY SCENE', playConfig).setOrigin(0.5);
+
+        cursors = this.input.keyboard.createCursorKeys();
+
+        this.virus = this.physics.add.sprite(centerX, 0, 'virus');
+        this.virus.setGravityY(60);
+        this.virus.setCollideWorldBounds(true);
+        this.virus.setBounce(0.1);
+        this.virus.setMaxVelocity(0, 100);
+        this.virus.isDestroyed = false;
+        this.virus.canJump = false;
+
+        this.ground = this.physics.add.sprite(centerX, this.game.config.height * .95, 'ground');
+        this.ground.displayWidth = this.game.config.width * 1.1;
+        //this.ground.setCollideWorldBounds(true);
+
+        this.ground.setImmovable();
+
+        this.physics.add.collider(this.virus, this.ground);
+
+
 addPlatform() {
 
     this.skinDesider = Math.floor(Math.random() * 3) + 1; //picks a random number between 1-3, uses this number to pick a skin for the platform
@@ -93,11 +115,32 @@ addGround() {
         this.ground =  new Ground(this, 1200, this.heightDesider1, 'platform1', 0).setScale(5, 0.5); 
     } else {
         this.ground =  new Ground(this, 1200, this.heightDesider1, 'platform2', 0).setScale(5, 0.5);
+
     }
         
     this.groundGroup.add(this.ground);  // add it to existing group
     this.groundPhysics.add(this.platform);
 }
 
+
+    update() {
+      this.ground1.update();
+
+        if (!this.virus.isDestroyed) {
+
+            if (!cursors.up.isDown && this.virus.body.touching.down) {
+                this.virus.canJump = true;
+
+            }
+            if (cursors.up.isDown && this.virus.canJump && this.virus.body.touching.down) {
+
+                this.virus.setVelocityY(-100);
+            }
+        }
+    }
+
+
 }
+let textSpacer = 64;
+
 
