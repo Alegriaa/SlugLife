@@ -22,7 +22,15 @@ let config = {
 
 let game = new Phaser.Game(config);
 
+
 let keyL, keyJ;
+
+game.settings = {
+    platformSpeed: 4,//this is the number that the platforms and ground are connected to, we could also seperate them into diff values easily
+      
+}
+
+
 let centerX = game.config.width/2;
 let centerY = game.config.height/2;
 let virus = null;
