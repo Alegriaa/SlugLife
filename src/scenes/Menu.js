@@ -4,6 +4,8 @@ class Menu extends Phaser.Scene {
     }
 
     preload() {
+        this.load.image('virus', './assets/placeholderPlayer.png');
+        this.load.image('ground', './assets/ground.png');
 
     }
 
@@ -24,6 +26,9 @@ class Menu extends Phaser.Scene {
 
         this.add.text(centerX, centerY, 'SLUG LIFE', menuConfig).setOrigin(0.5);
         keyL = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.L);
+        keyJ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J);
+
+
 
     }
 
