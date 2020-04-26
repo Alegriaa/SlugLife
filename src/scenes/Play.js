@@ -38,6 +38,15 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
         this.groundGroup = this.add.group({
             runChildUpdate: true    // make sure update runs on group children
         });
+
+        this.platformsPhysics = this.add.physicsGroup();
+        this.groundPhysics = this.add.physicsGroup();
+
+
+        this.platformsPhysics.setAll('body.allowGravity', false);
+        this.platformsPhysics.setAll('body.immovable', true);
+        this.groundPhysics.setAll('body.allowGravity', false);
+        this.groundPhysics.setAll('body.immovable', true);
         
         this.add.text(centerX, centerY, 'SLUG LIFE PLAY SCENE', playConfig).setOrigin(0.5);  
         
@@ -68,6 +77,7 @@ addPlatform() {
     }
         
     this.platformGroup.add(this.platform); // add it to existing group
+    this.platformsPhysics.add(this.platform);
 }
 
 addGround() {
@@ -86,6 +96,7 @@ addGround() {
     }
         
     this.groundGroup.add(this.ground);  // add it to existing group
+    this.groundPhysics.add(this.platform);
 }
 
 }
