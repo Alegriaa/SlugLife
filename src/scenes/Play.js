@@ -13,8 +13,8 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
         this.load.image('platform1', './assets/platform1.png');//placeholder image 
         this.load.image('platform2', './assets/platform2.png');//placeholder image 
         this.load.image('platform3', './assets/platform3.png');//placeholder image 
-    
-    
+        this.load.image('background1', './assets/background.png');//placeholder image 
+        this.load.image('backgroundFront', './assets/backgroundFront.png');//placeholder image 
     }
     create() {
         let playConfig = {
@@ -28,6 +28,7 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
                 bottom: 5,
             },
             fixedWidth: 0
+
 
         }
         
@@ -49,6 +50,11 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
         this.virus.isDestroyed = false;
 
 
+
+        }  
+        this.background1 = this.add.tileSprite(0,0, 960, 640,'background1').setOrigin(0,0);
+        this.backgroundFront = this.add.tileSprite(0,0, 960, 640,'backgroundFront').setOrigin(0,0);
+
         //platforms spawn on the top half of the screen and the ground objects spawn on the bottom half
         this.platformGroup = this.add.group({
             runChildUpdate: true    // make sure update runs on group children
@@ -68,21 +74,25 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
         //this.groundPhysics.setAll('body.immovable', true);
         
   
+
+
         
         this.platformClock = this.time.delayedCall(700, () => { //delay call to spawn second platform
             this.addPlatform();
          }, null, this);
          this.groundClock = this.time.delayedCall(2500, () => { //delay call to spawn extra ground
          }, null, this); 
+         
+        this.ground1 = this.physics.add.sprite(100, 500, 'platform').setScale(15, .5).setOrigin(0, 0);//spawn starting platform
+        //this.ground1.setImmovable();
 
-        this.ground1 = new Ground(this, 100 , 500, 'platform', 0).setScale(15, .5).setOrigin(0, 0);//spawn starting platform
-    
-
+        this.addGround();
 
 
         this.add.text(centerX, centerY - textSpacer * 4, 'SLUG LIFE PLAY SCENE', playConfig).setOrigin(0.5);
 
         
+
 
       //  this.ground = this.add.group();
 for (let i = 0; i < game.config.width; i += tileSize){
@@ -94,10 +104,22 @@ for (let i = 0; i < game.config.width; i += tileSize){
       this.ground.setImmovable();
 }
 
+
         //this.ground.setCollideWorldBounds(true);
 
+<
         this.physics.add.collider(this.virus, this.ground)
 
+
+
+        this.ground.setImmovable();
+        this.physics.add.collider(this.virus, this.ground1);
+        this.physics.add.collider(this.virus, this.ground);
+        this.physics.add.collider(this.virus, this.platformGroup);
+        this.physics.add.collider(this.virus, this.groundGroup);
+        
+        //this.groundGroup.setAll('body.immovable', true);
+        //this.platformGroup.setAll('body.immovable', true);
 
         }
 
@@ -110,6 +132,7 @@ addPlatform() {
     // create new platforms according to the height and skin parameters
     if(this.skinDesider == 1){
         this.platform =  new Platform(this, 1200, this.heightDesider, 'platform', 0).setScale(5, 0.5);
+        
     } else if (this.skinDesider == 2){
 
         this.platform =  new Platform(this, 1200, this.heightDesider, 'platform1', 0).setScale(5, 0.5); 
@@ -143,7 +166,9 @@ addGround() {
 
 
     update() {
-      this.ground1.update();
+        this.background1.tilePositionX += 2;
+        this.backgroundFront.tilePositionX += 4;
+      this.ground1.x-= 6;
 
         if (!this.virus.isDestroyed) {
 
@@ -169,6 +194,8 @@ addGround() {
             // }
         }
     }
+
+
 
 
 }
