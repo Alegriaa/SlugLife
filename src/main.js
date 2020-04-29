@@ -38,5 +38,6 @@ let ground = null;
 let cursors = null;
 const virusWidth = 40;
 const virusHeight = 80;
-const virusVelocity = 100;
+//const virusVelocity = 100;
+const tileSize = 35;
 
