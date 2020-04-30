@@ -192,7 +192,7 @@ addGround() {
             // if (cursors.up.isDown && this.virus.canJump && this.virus.body.touching.down) {
 
             //     this.virus.setVelocityY(-100);
-            // }
+            // } checking checking checking checking 
         }
     }
 
