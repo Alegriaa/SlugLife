@@ -31,13 +31,17 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
 
 
         }
-        
+        this.add.text(centerX, centerY - textSpacer * 4, 'SLUG LIFE PLAY SCENE 2', playConfig).setOrigin(0.5);
+
+
         this.ACCELERATION = 1500;
         this.MAX_X_VEL = 500;   // pixels/second
         this.MAX_Y_VEL = 5000;
         this.DRAG = 600;    // DRAG < ACCELERATION = icy slide
-        this.MAX_JUMPS = 1; // change for double/triple/etc. jumps 🤾‍♀️
+        this.MAX_JUMPS = 1; // change for double/triple/etc. jumps 🤾‍
         this.JUMP_VELOCITY = -700;
+        
+        
        
 
         cursors = this.input.keyboard.createCursorKeys();
@@ -45,13 +49,11 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
         this.background1 = this.add.tileSprite(0,0, 960, 640,'background1').setOrigin(0,0);
         this.backgroundFront = this.add.tileSprite(0,0, 960, 640,'backgroundFront').setOrigin(0,0);
 
-        this.virus = this.physics.add.sprite(centerX, 0, 'virus');
-        this.virus.setGravityY(60);
-        this.virus.setCollideWorldBounds(true);
-       // this.virus.setBounce(0.1);
-        this.virus.setMaxVelocity(this.MAX_X_VEL, this.MAX_Y_VEL);
-        this.virus.isDestroyed = false;
-         this.virus.body.gravity.y = 2600;
+        this.virus = new Virus(this, centerX, 0, 'virus');
+      // this.virus.body.gravity.y = 2600;
+        //this.virus.setMaxVelocity(this.MAX_X_VEL, this.MAX_Y_VEL);
+        //this.virus.setCollideWorldBounds(true);
+        
 
 
 
@@ -83,20 +85,20 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
         this.addGround();
 
 
-        this.add.text(centerX, centerY - textSpacer * 4, 'SLUG LIFE PLAY SCENE', playConfig).setOrigin(0.5);
+        
 
         
 
 
-      //  this.ground = this.add.group();
-for (let i = 0; i < game.config.width; i += tileSize){
-      this.ground = this.physics.add.sprite(centerX, this.game.config.height * .95, 'ground');
-      //this.ground.displayWidth = this.game.config.width * 1.1;
-      //this.ground.setCollideWorldBounds(true);
-      this.ground.setCollideWorldBounds(true);
+//       //  this.ground = this.add.group();
+// for (let i = 0; i < game.config.width; i += tileSize){
+//       this.ground = this.physics.add.sprite(centerX, this.game.config.height * .95, 'ground');
+//       //this.ground.displayWidth = this.game.config.width * 1.1;
+//       //this.ground.setCollideWorldBounds(true);
+//       this.ground.setCollideWorldBounds(true);
 
-      this.ground.setImmovable();
-}
+//      // this.ground.setImmovable();
+// }
 
 
         //this.ground.setCollideWorldBounds(true);
@@ -106,7 +108,7 @@ for (let i = 0; i < game.config.width; i += tileSize){
 
 
 
-        this.ground.setImmovable();
+      //  this.ground.setImmovable();
         this.physics.add.collider(this.virus, this.ground1);
         this.physics.add.collider(this.virus, this.ground);
         this.physics.add.collider(this.virus, this.platformGroup);
@@ -163,7 +165,7 @@ addGround() {
     update() {
         this.background1.tilePositionX += 2;
         this.backgroundFront.tilePositionX += 4;
-      this.ground1.x-= 6;
+        this.ground1.x-= 6;
 
         if (!this.virus.isDestroyed) {
 
@@ -182,8 +184,9 @@ addGround() {
                 this.jumping = false;
             }
         }
-    }
 
+      
+    }
 
 
 
