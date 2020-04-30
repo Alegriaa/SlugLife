@@ -130,7 +130,7 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
         });
        
 
-        //this.game.physics.arcade.collide(this.virus, this.powerupGroup, function(a,b){ b.destroyPowerup();}, null);
+        //this.physics.arcade.collide(virus, powerupGroup, function(a,b){ b.destroyPowerup();}, null);
 
         }
     
@@ -144,7 +144,7 @@ addPlatform() {
     // create new platforms according to the height and skin parameters
     if(this.skinDesider == 1){
         this.platform =  new Platform(this, 1200, this.heightDesider, 'platform', 0).setScale(5, 0.5);
-        this.powerupAdd = new Powerup(this, 1200, this.heightDesider1-30, 'redbottle',0);
+        //this.powerupAdd = new Powerup(this, 1200, this.heightDesider1-30, 'redbottle',0);
         
     } else if (this.skinDesider == 2){
 
@@ -182,11 +182,7 @@ addGround() {
 
     update() {
         
-        if(this.powerup7 != null){
-            this.powerup7.x += 4;
-        }
-        
-    
+      
         this.background1.tilePositionX += .2;
         this.backgroundFront.tilePositionX += .4;
         this.ground1.x-= 6;

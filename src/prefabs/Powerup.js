@@ -3,11 +3,12 @@ class Powerup extends Phaser.Physics.Arcade.Sprite{
         super (scene, x, y, texture, frame);
         
         scene.add.existing(this);               // add to existing scene, displayList, updateList
-        scene.physics.add.existing(this);       // add physics body
+        scene.physics.add.existing(this);
+              
+         this.setVelocity(-200,0); 
         this.setImmovable();  
         scene.add.existing(this);
-         this.setVelocity(-200); 
-         this.setGravity(0);
+        
     }
 
 create(){
@@ -20,9 +21,14 @@ update(){
         //this.body.x = -4;
         super.update();
 
-        // add new barrier when existing barrier hits center X
+       
        
     }
+
+destroyPowerup(){
+    this.destroy();
+
+}
 
     
 }
