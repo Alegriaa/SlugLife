@@ -38,9 +38,12 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
         this.DRAG = 600;    // DRAG < ACCELERATION = icy slide
         this.MAX_JUMPS = 1; // change for double/triple/etc. jumps 🤾‍♀️
         this.JUMP_VELOCITY = -700;
-        this.physics.world.gravity.y = 2600;
+       
 
         cursors = this.input.keyboard.createCursorKeys();
+
+        this.background1 = this.add.tileSprite(0,0, 960, 640,'background1').setOrigin(0,0);
+        this.backgroundFront = this.add.tileSprite(0,0, 960, 640,'backgroundFront').setOrigin(0,0);
 
         this.virus = this.physics.add.sprite(centerX, 0, 'virus');
         this.virus.setGravityY(60);
@@ -48,12 +51,12 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
        // this.virus.setBounce(0.1);
         this.virus.setMaxVelocity(this.MAX_X_VEL, this.MAX_Y_VEL);
         this.virus.isDestroyed = false;
+         this.virus.body.gravity.y = 2600;
 
 
 
          
-        this.background1 = this.add.tileSprite(0,0, 960, 640,'background1').setOrigin(0,0);
-        this.backgroundFront = this.add.tileSprite(0,0, 960, 640,'backgroundFront').setOrigin(0,0);
+      
 
         //platforms spawn on the top half of the screen and the ground objects spawn on the bottom half
         this.platformGroup = this.add.group({
@@ -64,15 +67,6 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
             runChildUpdate: true    // make sure update runs on group children
         });
 
-       // this.platformsPhysics = this.add.physicsGroup();
-        //this.groundPhysics = this.add.physicsGroup();
-
-
-        //this.platformsPhysics.setAll('body.allowGravity', false);
-       // this.platformsPhysics.setAll('body.immovable', true);
-        //this.groundPhysics.setAll('body.allowGravity', false);
-        //this.groundPhysics.setAll('body.immovable', true);
-        
   
 
 
@@ -187,12 +181,6 @@ addGround() {
                 this.jumps--;
                 this.jumping = false;
             }
-
-            
-            // if (cursors.up.isDown && this.virus.canJump && this.virus.body.touching.down) {
-
-            //     this.virus.setVelocityY(-100);
-            // }
         }
     }
 
