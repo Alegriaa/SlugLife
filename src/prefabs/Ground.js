@@ -14,6 +14,7 @@ class Ground extends Phaser.Physics.Arcade.Sprite{
 
 create(){
     this.atEnd = false;
+    this.movementSpeed = 4;
     
 }
 
@@ -32,7 +33,19 @@ update(){
         if(this.x < -this.width-1000) { //-1000 so the starting ground platform doesn't despawn early
             this.destroy();
         }
+
+
+
     }
+
+    setSpeed(additionalSPEED){
+
+        this.movementSpeed += additionalSPEED;
+        console.log(this.movementSpeed);
+
+    }
+
+
 
     
 }

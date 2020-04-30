@@ -34,7 +34,7 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
         }
         this.add.text(centerX, centerY - textSpacer * 4, 'SLUG LIFE PLAY SCENE 2', playConfig).setOrigin(0.5);
 
-
+        this.gameSpeed = 200;
         this.ACCELERATION = 1500;
         this.MAX_X_VEL = 500;   // pixels/second
         this.MAX_Y_VEL = 5000;
@@ -82,10 +82,12 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
          }, null, this); 
          
         this.ground1 = this.physics.add.sprite(100, 500, 'platform').setScale(15, .5).setOrigin(0, 0);//spawn starting platform
+        
+       
         //this.ground1.setImmovable();
 
         this.addGround();
-
+         
          
         
 
@@ -121,8 +123,9 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
        
         //this.groundGroup.setAll('body.immovable', true);
         //this.platformGroup.setAll('body.immovable', true);
-          this.powerupTest = new Powerup(this, 500, 500, 'redbottle',0);
-          this.powerupGroup.add(this.powerupTest);
+          //this.powerupTest = new Powerup(this, 500, 500, 'redbottle',0);
+          this.powerUptest = this.physics.add.sprite(500, centerY, 'redbottle').setOrigin(0.5);
+          //this.powerupGroup.add(this.powerupTest);
        
           this.anims.create({
             key: 'explode',
@@ -131,7 +134,20 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
         });
        
 
-        //this.physics.arcade.collide(this.virus, this.powerupGroup, function(a,b){ console.log('collided');}, null);
+       this.physics.add.collider(this.virus, this.powerUptest, (a,b)=>{
+        
+        this.setGameSpeed(40);
+        this.respawnPowerup();
+        console.log(this.gameSpeed);
+
+    }, null, this);
+    this.physics.add.collider(this.virus, this.powerupGroup, (a,b)=>{
+        //b.destroyP().
+        this.setGameSpeed(40);
+        this.respawnPowerup();
+        console.log(this.gameSpeed);
+
+    }, null, this);
 
         }
     
@@ -183,7 +199,10 @@ addGround() {
 
     update() {
         
-      
+        this.powerUptest.setVelocity(-200,0);
+        if(this.powerUptest.x<-10){
+            this.respawnPowerup();
+        } 
         this.background1.tilePositionX += .2;
         this.backgroundFront.tilePositionX += .4;
         this.ground1.x-= 6;
@@ -211,6 +230,17 @@ addGround() {
 
     destroyP(a,b){
         console.log('destroy');
+    }
+
+    respawnPowerup(){
+        console.log('poop');
+        this.powerUptest.x = 1200;
+    }
+
+    setGameSpeed(speed){
+
+        this.gameSpeed += speed;
+        
     }
 
 
