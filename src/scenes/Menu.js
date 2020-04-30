@@ -25,7 +25,7 @@ class Menu extends Phaser.Scene {
 
         }
         this.starfield = this.add.tileSprite(0, 0, 960, 640, 'background').setOrigin(0, 0);
-        this.add.text(centerX, centerY, 'SLUG LIFE', menuConfig).setOrigin(0.5);
+        this.add.text(centerX, centerY, 'SLUG LIFE check', menuConfig).setOrigin(0.5);
         this.add.text(centerX, centerY - 64, 'Press Up Arrow to Jump', menuConfig).setOrigin(0.5);
         this.add.text(centerX, centerY - 128, 'Press L to Start', menuConfig).setOrigin(0.5);
         keyL = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.L);
