@@ -8,13 +8,14 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
 
 */
     preload(){
-
+        this.load.image('redbottle', './assets/redbottle.png');
         this.load.image('platform', './assets/platform.png');//placeholder image 
         this.load.image('platform1', './assets/platform1.png');//placeholder image 
         this.load.image('platform2', './assets/platform2.png');//placeholder image 
         this.load.image('platform3', './assets/platform3.png');//placeholder image 
         this.load.image('background1', './assets/background.png');//placeholder image 
         this.load.image('backgroundFront', './assets/backgroundFront.png');//placeholder image 
+        this.load.image('redAnimation', './assets/redAnimation.png');
     }
     create() {
         let playConfig = {
@@ -50,6 +51,7 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
         this.backgroundFront = this.add.tileSprite(0,0, 960, 640,'backgroundFront').setOrigin(0,0);
 
         this.virus = new Virus(this, centerX, 0, 'virus');
+
       // this.virus.body.gravity.y = 2600;
         //this.virus.setMaxVelocity(this.MAX_X_VEL, this.MAX_Y_VEL);
         //this.virus.setCollideWorldBounds(true);
@@ -69,9 +71,9 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
             runChildUpdate: true    // make sure update runs on group children
         });
 
-  
-
-
+        this.powerupGroup = this.add.group({
+            runChildUpdate: true
+        })
         
         this.platformClock = this.time.delayedCall(700, () => { //delay call to spawn second platform
             this.addPlatform();
@@ -84,7 +86,7 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
 
         this.addGround();
 
-
+         
         
 
         
@@ -113,9 +115,22 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
         this.physics.add.collider(this.virus, this.ground);
         this.physics.add.collider(this.virus, this.platformGroup);
         this.physics.add.collider(this.virus, this.groundGroup);
+        this.physics.add.collider(this.virus, this.powerupGroup);
         
+        
+       
         //this.groundGroup.setAll('body.immovable', true);
         //this.platformGroup.setAll('body.immovable', true);
+          this.powerupTest = new Powerup(this, 500, 500, 'redbottle',0);
+       
+          this.anims.create({
+            key: 'explode',
+            frames: this.anims.generateFrameNumbers('explosion', { start: 0, end: 5, first: 0}),
+            frameRate: 30
+        });
+       
+
+        //this.game.physics.arcade.collide(this.virus, this.powerupGroup, function(a,b){ b.destroyP();}, null);
 
         }
     
@@ -149,6 +164,8 @@ addGround() {
     // create new barrier according to the height and skin parameters
     if(this.skinDesider1 == 1){
         this.ground =  new Ground(this, 1200, this.heightDesider1, 'platform', 0).setScale(5, 0.5);
+        this.powerupAdd = new Powerup(this, 1200, this.heightDesider1-30, 'redbottle',0);
+        this.powerupGroup.add(this.powerupAdd);
     } else if (this.skinDesider1 == 2){
 
         this.ground =  new Ground(this, 1200, this.heightDesider1, 'platform1', 0).setScale(5, 0.5); 
@@ -156,17 +173,23 @@ addGround() {
         this.ground =  new Ground(this, 1200, this.heightDesider1, 'platform2', 0).setScale(5, 0.5);
 
     }
-        
+    
     this.groundGroup.add(this.ground);  // add it to existing group
     //this.groundPhysics.add(this.platform);
 }
 
 
     update() {
-        this.background1.tilePositionX += 2;
-        this.backgroundFront.tilePositionX += 4;
+        
+        if(this.powerup7 != null){
+            this.powerup7.x += 4;
+        }
+        
+    
+        this.background1.tilePositionX += .2;
+        this.backgroundFront.tilePositionX += .4;
         this.ground1.x-= 6;
-
+        //this.powerupGroup.body.x -=4;
         if (!this.virus.isDestroyed) {
 
             if(this.virus.body.touching.down) {
@@ -184,8 +207,12 @@ addGround() {
                 this.jumping = false;
             }
         }
-
+       
       
+    }
+
+    destroyP(a,b){
+        console.log('destroy');
     }
 
 
