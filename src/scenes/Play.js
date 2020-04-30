@@ -51,7 +51,7 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
 
 
 
-        }  
+         
         this.background1 = this.add.tileSprite(0,0, 960, 640,'background1').setOrigin(0,0);
         this.backgroundFront = this.add.tileSprite(0,0, 960, 640,'backgroundFront').setOrigin(0,0);
 
@@ -107,7 +107,7 @@ for (let i = 0; i < game.config.width; i += tileSize){
 
         //this.ground.setCollideWorldBounds(true);
 
-<
+
         this.physics.add.collider(this.virus, this.ground)
 
 
@@ -122,6 +122,7 @@ for (let i = 0; i < game.config.width; i += tileSize){
         //this.platformGroup.setAll('body.immovable', true);
 
         }
+    
 
         
 addPlatform() {
