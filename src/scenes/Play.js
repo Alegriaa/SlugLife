@@ -122,6 +122,7 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
         //this.groundGroup.setAll('body.immovable', true);
         //this.platformGroup.setAll('body.immovable', true);
           this.powerupTest = new Powerup(this, 500, 500, 'redbottle',0);
+          this.powerupGroup.add(this.powerupTest);
        
           this.anims.create({
             key: 'explode',
@@ -130,7 +131,7 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
         });
        
 
-        //this.physics.arcade.collide(virus, powerupGroup, function(a,b){ b.destroyPowerup();}, null);
+        //this.physics.arcade.collide(this.virus, this.powerupGroup, function(a,b){ console.log('collided');}, null);
 
         }
     
