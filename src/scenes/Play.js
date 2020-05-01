@@ -307,6 +307,7 @@ addGround() {
                 this.jumping = false;
             }
         }
+        
         if(this.virus.body.y > 640){
             this.background1.tilePositionY -= 0.5;
             this.backgroundFront.tilePositionY -= 0.5;
