@@ -4,22 +4,26 @@ class Ground extends Phaser.Physics.Arcade.Sprite{
 
         scene.add.existing(this);               // add to existing scene, displayList, updateList
         scene.physics.add.existing(this);       // add physics body
-                  
+
+       //this.setVelocity(-200,0);          
         this.setImmovable();  
         scene.add.existing(this);
-        this.newBarrier = true;  
+        this.newBarrier = true; 
+        
     }
 
 create(){
     this.atEnd = false;
+    this.movementSpeed = 2;
+    
 }
 
 update(){
         // override physics sprite update()
         super.update();
-
+    
         // add new barrier when existing barrier hits center X
-        this.x -= game.settings.platformSpeed;;
+        this.x -= game.settings.smallSpeed;
         if(this.newBarrier && this.x < centerX+300) {
             this.newBarrier = false;
             this.scene.addGround();
@@ -29,7 +33,21 @@ update(){
         if(this.x < -this.width-1000) { //-1000 so the starting ground platform doesn't despawn early
             this.destroy();
         }
+        
+        
+
+
+
     }
+
+    setSpeed(additionalSPEED){
+
+        this.body.velocity.x = -400;
+        console.log(this.movementSpeed);
+        this.setVelocity(this.temp,0);
+    }
+
+
 
     
 }

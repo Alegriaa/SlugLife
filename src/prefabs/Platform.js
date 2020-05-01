@@ -3,7 +3,7 @@ class Platform extends Phaser.Physics.Arcade.Sprite{
         super (scene, x, y, texture, frame);
         scene.add.existing(this);               // add to existing scene, displayList, updateList
         scene.physics.add.existing(this);       // add physics body
-                  
+      //this.setVelocity(-400,0);          
         this.setImmovable();  
         scene.add.existing(this);
         this.newBarrier = true;  
@@ -14,7 +14,10 @@ preload(){
 
 }
 create(){
+     
     this.atEnd = false;
+
+   // this.body.velocity.x = this.scene.getMovementSpeed();
 }
 
 update(){
@@ -22,7 +25,7 @@ update(){
         super.update();
 
         // add new barrier when existing barrier hits around 1/4 of the screen travelled 
-        this.x -= game.settings.platformSpeed;;
+        this.x -= game.settings.smallSpeed;
         if(this.newBarrier && this.x < centerX+300) {
 
 
@@ -37,6 +40,4 @@ update(){
         }
     }
 
-
-
-}
+    }

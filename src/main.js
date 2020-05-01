@@ -26,8 +26,8 @@ let game = new Phaser.Game(config);
 let keyL, keyJ;
 
 game.settings = {
-    platformSpeed: 4,//this is the number that the platforms and ground are connected to, we could also seperate them into diff values easily
-      
+    platformSpeed: -200,//this is the number that the platforms and ground are connected to, we could also seperate them into diff values easily
+    smallSpeed: 6,  
 }
 
 
