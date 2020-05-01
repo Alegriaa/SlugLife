@@ -15,6 +15,8 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
         this.load.image('platform3', './assets/platform3.png');//placeholder image 
         this.load.image('background1', './assets/background.png');//placeholder image 
         this.load.image('backgroundFront', './assets/backgroundFront.png');//placeholder image 
+        this.load.spritesheet('virusAnimation', './assets/virus roll.png', { frameWidth: 50, frameHeight: 50, startFrame: 0, endFrame: 4 });
+        this.load.spritesheet('slugAnimation','./assets/SlugSprite.png', { frameWidth: 80, frameHeight: 50, startFrame: 0, endFrame: 4 });
     }
     create() {
         let playConfig = {
@@ -31,6 +33,9 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
 
 
         }
+
+       
+
 
         // some modifiers for virus
         this.ACCELERATION = 1500;
@@ -49,7 +54,31 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
         this.backgroundFront = this.add.tileSprite(0,0, 960, 640,'backgroundFront').setOrigin(0,0);
         this.add.text(centerX, centerY - textSpacer * 4, 'SLUG LIFE PLAY SCENE 2', playConfig).setOrigin(0.5);
 
-        this.virus = new Virus(this, centerX, 0, 'virus'); // we create a virus instance within play.js
+        
+        this.slug = new Slug(this, 900, 570, 'slugAnimation',0); // created new slug object in play.js
+
+        //animation for slug
+        this.anims.create({
+           key:'slug',
+           repeat: -1,
+           frames: this.anims.generateFrameNumbers('slugAnimation', {start: 0, end: 4, first: 0}),
+           frameRate: 10
+       });
+
+       this.slug.anims.play('slug'); 
+
+
+        this.virus = new Virus(this, centerX, 0, 'virusAnimation', 0); // we create a virus instance within play.js
+        
+        //animation for virus object
+        this.anims.create({
+            key: 'virus',
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('virusAnimation', {start: 0, end: 4, first: 0}),
+            frameRate: 20
+        });
+
+        this.virus.anims.play('virus');
     
 
         //platforms spawn on the top half of the screen and the ground objects spawn on the bottom half
@@ -135,8 +164,8 @@ addGround() {
 
 
     update() {
-        this.background1.tilePositionX += 2;
-        this.backgroundFront.tilePositionX += 4;
+        this.background1.tilePositionX += 0.2;
+        this.backgroundFront.tilePositionX += 0.5;
         this.ground1.x-= 6;
 
         // we check if the virus has been destroyed 
