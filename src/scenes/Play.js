@@ -137,7 +137,7 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
 
     this.physics.add.collider(this.virus, this.powerUpBlue, (a,b)=>{
         
-        game.settings.smallSpeed += 10;
+        game.settings.smallSpeed += 3;
         this.respawnBluePowerup();
         
         console.log(this.gameSpeed);
