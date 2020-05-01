@@ -26,7 +26,7 @@ update(){
     }
 
 destroyPowerup(){
-    this.destroy();
+    
 
 }
 

@@ -15,7 +15,9 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
         this.load.image('platform3', './assets/platform3.png');//placeholder image 
         this.load.image('background1', './assets/background.png');//placeholder image 
         this.load.image('backgroundFront', './assets/backgroundFront.png');//placeholder image 
-        this.load.image('redAnimation', './assets/redAnimation.png');
+        this.load.image('bluebottle', './assets/bluebottle.png')
+        //this.load.image('redAnimation', './assets/redAnimation.png');
+        
     }
     create() {
         let playConfig = {
@@ -44,7 +46,8 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
         
         
        
-
+        this.spawnPowerupBool = false;
+        this.spawnBluePowerupBool = false;
         cursors = this.input.keyboard.createCursorKeys();
 
         this.background1 = this.add.tileSprite(0,0, 960, 640,'background1').setOrigin(0,0);
@@ -84,35 +87,23 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
         this.ground1 = this.physics.add.sprite(100, 500, 'platform').setScale(15, .5).setOrigin(0, 0);//spawn starting platform
         
        
-        //this.ground1.setImmovable();
+       
 
         this.addGround();
          
          
         
-
-        
-
-
-//       //  this.ground = this.add.group();
-// for (let i = 0; i < game.config.width; i += tileSize){
-//       this.ground = this.physics.add.sprite(centerX, this.game.config.height * .95, 'ground');
-//       //this.ground.displayWidth = this.game.config.width * 1.1;
-//       //this.ground.setCollideWorldBounds(true);
-//       this.ground.setCollideWorldBounds(true);
-
-//      // this.ground.setImmovable();
-// }
+// 
 
 
-        //this.ground.setCollideWorldBounds(true);
+      
 
-
+        this.tempMovement = -400;
         this.physics.add.collider(this.virus, this.ground)
 
 
 
-      //  this.ground.setImmovable();
+        this.ground1.setImmovable();
         this.physics.add.collider(this.virus, this.ground1);
         this.physics.add.collider(this.virus, this.ground);
         this.physics.add.collider(this.virus, this.platformGroup);
@@ -120,31 +111,35 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
         this.physics.add.collider(this.virus, this.powerupGroup);
         
         
-       
-        //this.groundGroup.setAll('body.immovable', true);
-        //this.platformGroup.setAll('body.immovable', true);
-          //this.powerupTest = new Powerup(this, 500, 500, 'redbottle',0);
-          this.powerUptest = this.physics.add.sprite(500, centerY, 'redbottle').setOrigin(0.5);
+          this.powerUptest = this.physics.add.sprite(-5, centerY, 'redbottle').setOrigin(0.5);
           //this.powerupGroup.add(this.powerupTest);
-       
-          this.anims.create({
+         this.powerUpBlue = this.physics.add.sprite(-5, centerY,'bluebottle').setOrigin(0.5);
+         this.powerUptest.setImmovable();
+         this.powerUpBlue.setImmovable();
+         
+         
+         this.anims.create({
             key: 'explode',
-            frames: this.anims.generateFrameNumbers('explosion', { start: 0, end: 5, first: 0}),
+            frames: this.anims.generateFrameNumbers('redAnimation', { start: 0, end: 4, first: 0}),
             frameRate: 30
         });
-       
-
+        
+       // var bubble = this.animations.add('red');
+       // this.powerUptest.animations.play('bubble', 10, true);
        this.physics.add.collider(this.virus, this.powerUptest, (a,b)=>{
         
-        this.setGameSpeed(40);
+        game.settings.smallSpeed += 1;
         this.respawnPowerup();
         console.log(this.gameSpeed);
 
     }, null, this);
-    this.physics.add.collider(this.virus, this.powerupGroup, (a,b)=>{
-        //b.destroyP().
-        this.setGameSpeed(40);
-        this.respawnPowerup();
+
+
+    this.physics.add.collider(this.virus, this.powerUpBlue, (a,b)=>{
+        
+        game.settings.smallSpeed += 10;
+        this.respawnBluePowerup();
+        
         console.log(this.gameSpeed);
 
     }, null, this);
@@ -160,18 +155,24 @@ addPlatform() {
     
     // create new platforms according to the height and skin parameters
     if(this.skinDesider == 1){
-        this.platform =  new Platform(this, 1200, this.heightDesider, 'platform', 0).setScale(5, 0.5);
-        //this.powerupAdd = new Powerup(this, 1200, this.heightDesider1-30, 'redbottle',0);
+        this.platform =  new Platform(this, 1200, this.heightDesider, 'platform', 0,-500).setScale(5, 0.5);
+        
+        
         
     } else if (this.skinDesider == 2){
 
-        this.platform =  new Platform(this, 1200, this.heightDesider, 'platform1', 0).setScale(5, 0.5); 
+        this.platform =  new Platform(this, 1200, this.heightDesider, 'platform1', 0, -500).setScale(5, 0.5); 
     } else {
-        this.platform =  new Platform(this, 1200, this.heightDesider, 'platform2', 0).setScale(5, 0.5);
+        this.platform =  new Platform(this, 1200, this.heightDesider, 'platform2', 0,-500).setScale(5, 0.5);
     }
-        
+    if(this.spawnBluePowerupBool){
+
+        this.powerUpBlue.x = 1200;
+        this.powerUpBlue.y = this.heightDesider-30;
+        this.spawnBluePowerupBool = false;
+    }
     this.platformGroup.add(this.platform); // add it to existing group
-    //this.platformsPhysics.add(this.platform);
+    
 }
 
 addGround() {
@@ -182,8 +183,9 @@ addGround() {
     // create new barrier according to the height and skin parameters
     if(this.skinDesider1 == 1){
         this.ground =  new Ground(this, 1200, this.heightDesider1, 'platform', 0).setScale(5, 0.5);
-        this.powerupAdd = new Powerup(this, 1200, this.heightDesider1-30, 'redbottle',0);
-        this.powerupGroup.add(this.powerupAdd);
+        //this.powerupAdd = new Powerup(this, 1200, this.heightDesider1-30, 'redbottle',0);
+        
+      
     } else if (this.skinDesider1 == 2){
 
         this.ground =  new Ground(this, 1200, this.heightDesider1, 'platform1', 0).setScale(5, 0.5); 
@@ -191,18 +193,30 @@ addGround() {
         this.ground =  new Ground(this, 1200, this.heightDesider1, 'platform2', 0).setScale(5, 0.5);
 
     }
-    
+    if(this.spawnPowerupBool){
+
+        this.powerUptest.x = 1200;
+        this.powerUptest.y = this.heightDesider1-30;
+        this.spawnPowerupBool = false;
+    }
+   
     this.groundGroup.add(this.ground);  // add it to existing group
-    //this.groundPhysics.add(this.platform);
+    
 }
 
 
     update() {
         
-        this.powerUptest.setVelocity(-200,0);
+        this.powerUptest.x -= game.settings.smallSpeed;
+        this.powerUpBlue.x -= game.settings.smallSpeed;
         if(this.powerUptest.x<-10){
             this.respawnPowerup();
+            this.spawnPowerupBool = true;
         } 
+        if(this.powerUpBlue.x <-10){
+            this.spawnBluePowerupBool = true;
+        } 
+
         this.background1.tilePositionX += .2;
         this.backgroundFront.tilePositionX += .4;
         this.ground1.x-= 6;
@@ -225,22 +239,27 @@ addGround() {
             }
         }
        
-      
     }
 
-    destroyP(a,b){
-        console.log('destroy');
-    }
 
     respawnPowerup(){
-        console.log('poop');
-        this.powerUptest.x = 1200;
+        
+        this.powerUptest.x = -7;
+        
     }
 
     setGameSpeed(speed){
 
         this.gameSpeed += speed;
         
+    }
+
+    getMovementSpeed(){
+        return 200;
+
+    }
+    respawnBluePowerup(){
+        this.powerUpBlue.x = -7;
     }
 
 
