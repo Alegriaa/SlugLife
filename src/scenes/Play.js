@@ -307,7 +307,20 @@ addGround() {
                 this.jumping = false;
             }
         }
+        if(this.virus.body.y > 640){
+            this.background1.tilePositionY -= 0.5;
+            this.backgroundFront.tilePositionY -= 0.5;
+            this.background1.tilePositionX += 1;
+            this.backgroundFront.tilePositionX += 1;
+            this.ground1.y -= 1;
+            this.ground1.x -= 1;
+            
+              
+            this.time.delayedCall(3000, () => { this.scene.start('endScene'); });
+          
+       
 
+        }
        
     }
 
@@ -324,20 +337,7 @@ addGround() {
         
     }
 
-        if(this.virus.body.y > 640){
-            this.background1.tilePositionY -= 0.5;
-            this.backgroundFront.tilePositionY -= 0.5;
-            this.background1.tilePositionX += 1;
-            this.backgroundFront.tilePositionX += 1;
-            this.ground1.y -= 1;
-            this.ground1.x -= 1;
-            
-              
-            this.time.delayedCall(3000, () => { this.scene.start('endScene'); });
-          
-       
-
-        }
+        
 
 
     getMovementSpeed(){
@@ -348,12 +348,11 @@ addGround() {
         this.powerUpBlue.x = -7;
     }
 
-      
-    }
 
 
 
 }
+
 let textSpacer = 64;
 
 
