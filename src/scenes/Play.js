@@ -8,7 +8,11 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
 
 */
     preload(){
+
         this.load.image('redbottle', './assets/redbottle.png');
+
+        // Maria, should we move these to preload in Menu, so they are ready in play scene.?
+
         this.load.image('platform', './assets/platform.png');//placeholder image 
         this.load.image('platform1', './assets/platform1.png');//placeholder image 
         this.load.image('platform2', './assets/platform2.png');//placeholder image 
@@ -18,6 +22,10 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
         this.load.image('bluebottle', './assets/bluebottle.png')
         //this.load.image('redAnimation', './assets/redAnimation.png');
         
+
+        this.load.spritesheet('virusAnimation', './assets/virus roll.png', { frameWidth: 50, frameHeight: 50, startFrame: 0, endFrame: 4 });
+        this.load.spritesheet('slugAnimation','./assets/SlugSprite.png', { frameWidth: 80, frameHeight: 50, startFrame: 0, endFrame: 4 });
+
     }
     create() {
         let playConfig = {
@@ -34,18 +42,24 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
 
 
         }
+
         this.add.text(centerX, centerY - textSpacer * 4, 'SLUG LIFE PLAY SCENE 2', playConfig).setOrigin(0.5);
 
         this.gameSpeed = 200;
+
+        // some modifiers for virus
+
         this.ACCELERATION = 1500;
         this.MAX_X_VEL = 500;   // pixels/second
         this.MAX_Y_VEL = 5000;
         this.DRAG = 600;    // DRAG < ACCELERATION = icy slide
         this.MAX_JUMPS = 1; // change for double/triple/etc. jumps 🤾‍
+
         this.JUMP_VELOCITY = -700;
         
         
        
+
         this.spawnPowerupBool = false;
         this.spawnBluePowerupBool = false;
         cursors = this.input.keyboard.createCursorKeys();
@@ -61,9 +75,44 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
         
 
 
+        cursors = this.input.keyboard.createCursorKeys(); // we create keys to be used
+
+        this.background1 = this.add.tileSprite(0,0, 960, 640,'background1').setOrigin(0,0);
+        this.backgroundFront = this.add.tileSprite(0,0, 960, 640,'backgroundFront').setOrigin(0,0);
+        this.add.text(centerX, centerY - textSpacer * 4, 'SLUG LIFE PLAY SCENE 2', playConfig).setOrigin(0.5);
+
+
+        
+        this.slug = new Slug(this, 900, 570, 'slugAnimation',0); // created new slug object in play.js
+
+        //animation for slug
+        this.anims.create({
+           key:'slug',
+           repeat: -1,
+           frames: this.anims.generateFrameNumbers('slugAnimation', {start: 0, end: 4, first: 0}),
+           frameRate: 10
+       });
+
 
          
       
+
+       this.slug.anims.play('slug'); 
+
+
+        this.virus = new Virus(this, centerX, 0, 'virusAnimation', 0); // we create a virus instance within play.js
+        
+        //animation for virus object
+        this.anims.create({
+            key: 'virus',
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('virusAnimation', {start: 0, end: 4, first: 0}),
+            frameRate: 20
+        });
+
+        this.virus.anims.play('virus');
+    
+
 
         //platforms spawn on the top half of the screen and the ground objects spawn on the bottom half
         this.platformGroup = this.add.group({
@@ -74,9 +123,15 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
             runChildUpdate: true    // make sure update runs on group children
         });
 
+
         this.powerupGroup = this.add.group({
             runChildUpdate: true
         })
+
+  
+
+
+
         
         this.platformClock = this.time.delayedCall(700, () => { //delay call to spawn second platform
             this.addPlatform();
@@ -90,20 +145,24 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
        
 
         this.addGround();
-         
-         
-        
-// 
+
 
 
       
 
         this.tempMovement = -400;
+
+
+
         this.physics.add.collider(this.virus, this.ground)
 
 
 
+
         this.ground1.setImmovable();
+
+     
+
         this.physics.add.collider(this.virus, this.ground1);
         this.physics.add.collider(this.virus, this.ground);
         this.physics.add.collider(this.virus, this.platformGroup);
@@ -206,6 +265,7 @@ addGround() {
 
 
     update() {
+
         
         this.powerUptest.x -= game.settings.smallSpeed;
         this.powerUpBlue.x -= game.settings.smallSpeed;
@@ -221,23 +281,33 @@ addGround() {
         this.backgroundFront.tilePositionX += .4;
         this.ground1.x-= 6;
         //this.powerupGroup.body.x -=4;
-        if (!this.virus.isDestroyed) {
 
+        this.background1.tilePositionX += 0.2;
+        this.backgroundFront.tilePositionX += 0.5;
+        this.ground1.x-= 6;
+
+        // we check if the virus has been destroyed 
+
+        if (!this.virus.isDestroyed) {
+            // making sure the player is touching the ground
             if(this.virus.body.touching.down) {
                 this.jumps = this.MAX_JUMPS;
                 this.jumping = false;
             } 
-
+            
+            // creates more jumps
             if (this.jumps > 0 && Phaser.Input.Keyboard.DownDuration(cursors.up, 150)) {
                 this.virus.body.velocity.y = this.JUMP_VELOCITY;
                 this.virus.jumping = true;
 
             }
+            // resets jumps
             if(this.jumping && Phaser.Input.Keyboard.UpDuration(cursors.up)) {
                 this.jumps--;
                 this.jumping = false;
             }
         }
+
        
     }
 
@@ -254,12 +324,31 @@ addGround() {
         
     }
 
+        if(this.virus.body.y > 640){
+            this.background1.tilePositionY -= 0.5;
+            this.backgroundFront.tilePositionY -= 0.5;
+            this.background1.tilePositionX += 1;
+            this.backgroundFront.tilePositionX += 1;
+            this.ground1.y -= 1;
+            this.ground1.x -= 1;
+            
+              
+            this.time.delayedCall(3000, () => { this.scene.start('endScene'); });
+          
+       
+
+        }
+
+
     getMovementSpeed(){
         return 200;
 
     }
     respawnBluePowerup(){
         this.powerUpBlue.x = -7;
+    }
+
+      
     }
 
 

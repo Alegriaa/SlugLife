@@ -14,6 +14,7 @@ class Virus extends Phaser.Physics.Arcade.Sprite{     // use phasers sprite
 
        this.body.gravity.y = 2600;
        this.setCollideWorldBounds(true);
+
         
        // this.virus.setBounce(0.1);
         this.isDestroyed = false;
@@ -24,6 +25,10 @@ class Virus extends Phaser.Physics.Arcade.Sprite{     // use phasers sprite
     }
    
     update() {
+
+
+        // we may not need this here & in play.js
+
         if (!this.isDestroyed) {
 
             if(this.body.touching.down) {
@@ -41,5 +46,16 @@ class Virus extends Phaser.Physics.Arcade.Sprite{     // use phasers sprite
                 this.jumping = false;
             }
         }
+
+
+
+        if(this.body.y == 640){
+            this.scene.start("endScene")
+
+          
+       
+
+        }
+
     }
 }
