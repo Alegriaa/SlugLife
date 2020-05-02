@@ -25,7 +25,7 @@ update(){
         super.update();
 
         // add new barrier when existing barrier hits around 1/4 of the screen travelled 
-        this.x -= game.settings.smallSpeed;
+        this.x -= this.scene.gameSpeed;
         if(this.newBarrier && this.x < centerX+300) {
 
 

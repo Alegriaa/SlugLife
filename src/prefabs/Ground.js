@@ -23,7 +23,7 @@ update(){
         super.update();
     
         // add new barrier when existing barrier hits center X
-        this.x -= game.settings.smallSpeed;
+        this.x -= this.scene.gameSpeed;
         if(this.newBarrier && this.x < centerX+300) {
             this.newBarrier = false;
             this.scene.addGround();

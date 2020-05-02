@@ -32,7 +32,7 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
             fontFamily: 'Impact', // changed the font
             fontSize: '28px',
 
-            color: '#00FF00',
+            color: '#B202FF',
             align: 'right',
             padding: {
                 top: 5,
@@ -45,7 +45,8 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
 
         this.add.text(centerX, centerY - textSpacer * 4, 'SLUG LIFE PLAY SCENE 2', playConfig).setOrigin(0.5);
 
-        this.gameSpeed = 200;
+        this.gameSpeed = game.settings.smallSpeed;
+        this.playerScore = 0;
 
         // some modifiers for virus
 
@@ -81,7 +82,19 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
         this.backgroundFront = this.add.tileSprite(0,0, 960, 640,'backgroundFront').setOrigin(0,0);
         this.add.text(centerX, centerY - textSpacer * 4, 'SLUG LIFE PLAY SCENE 2', playConfig).setOrigin(0.5);
 
-
+        let scoreConfig = {
+            fontFamily: 'Courier',
+            fontSize: '28px',
+            backgroundColor: '#B202FF',
+            color: '#843605',
+            align: 'right',
+            padding: {
+                top: 5,
+                bottom: 5,
+            },
+            fixedWidth: 100
+        }
+        this.scoreLeft = this.add.text(69, 54, this.playerScore, scoreConfig);
         
         this.slug = new Slug(this, 900, 570, 'slugAnimation',0); // created new slug object in play.js
 
@@ -93,11 +106,11 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
            frameRate: 10
        });
 
-
+   
          
       
 
-       this.slug.anims.play('slug'); 
+       //this.slug.anims.play('slug'); 
 
 
         this.virus = new Virus(this, centerX, 0, 'virusAnimation', 0); // we create a virus instance within play.js
@@ -139,7 +152,7 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
          this.groundClock = this.time.delayedCall(2500, () => { //delay call to spawn extra ground
          }, null, this); 
          
-        this.ground1 = this.physics.add.sprite(100, 500, 'platform').setScale(15, .5).setOrigin(0, 0);//spawn starting platform
+        this.ground1 = this.physics.add.sprite(100, 500, 'platform').setScale(7, 1).setOrigin(0, 0);//spawn starting platform
         
        
        
@@ -187,19 +200,20 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
        // this.powerUptest.animations.play('bubble', 10, true);
        this.physics.add.collider(this.virus, this.powerUptest, (a,b)=>{
         
-        game.settings.smallSpeed += 1;
+        this.gameSpeed += 1;
         this.respawnPowerup();
         console.log(this.gameSpeed);
+        this.playerScore += 1;
 
     }, null, this);
 
 
     this.physics.add.collider(this.virus, this.powerUpBlue, (a,b)=>{
         
-        game.settings.smallSpeed += 3;
+        this.gameSpeed += 2;
         this.respawnBluePowerup();
+        this.playerScore += 2;
         
-        console.log(this.gameSpeed);
 
     }, null, this);
 
@@ -214,15 +228,15 @@ addPlatform() {
     
     // create new platforms according to the height and skin parameters
     if(this.skinDesider == 1){
-        this.platform =  new Platform(this, 1200, this.heightDesider, 'platform', 0,-500).setScale(5, 0.5);
+        this.platform =  new Platform(this, 1200, this.heightDesider, 'platform', 0,-500);
         
         
         
     } else if (this.skinDesider == 2){
 
-        this.platform =  new Platform(this, 1200, this.heightDesider, 'platform1', 0, -500).setScale(5, 0.5); 
+        this.platform =  new Platform(this, 1200, this.heightDesider, 'platform1', 0, -500); 
     } else {
-        this.platform =  new Platform(this, 1200, this.heightDesider, 'platform2', 0,-500).setScale(5, 0.5);
+        this.platform =  new Platform(this, 1200, this.heightDesider, 'platform2', 0,-500);
     }
     if(this.spawnBluePowerupBool){
 
@@ -241,15 +255,15 @@ addGround() {
 
     // create new barrier according to the height and skin parameters
     if(this.skinDesider1 == 1){
-        this.ground =  new Ground(this, 1200, this.heightDesider1, 'platform', 0).setScale(5, 0.5);
+        this.ground =  new Ground(this, 1200, this.heightDesider1, 'platform', 0);
         //this.powerupAdd = new Powerup(this, 1200, this.heightDesider1-30, 'redbottle',0);
         
       
     } else if (this.skinDesider1 == 2){
 
-        this.ground =  new Ground(this, 1200, this.heightDesider1, 'platform1', 0).setScale(5, 0.5); 
+        this.ground =  new Ground(this, 1200, this.heightDesider1, 'platform1', 0); 
     } else {
-        this.ground =  new Ground(this, 1200, this.heightDesider1, 'platform2', 0).setScale(5, 0.5);
+        this.ground =  new Ground(this, 1200, this.heightDesider1, 'platform2', 0);
 
     }
     if(this.spawnPowerupBool){
@@ -266,9 +280,13 @@ addGround() {
 
     update() {
 
-        
-        this.powerUptest.x -= game.settings.smallSpeed;
-        this.powerUpBlue.x -= game.settings.smallSpeed;
+        if (this.gameSpeed > 20){
+        }
+
+        this.scoreLeft.text = this.playerScore;
+
+        this.powerUptest.x -= this.gameSpeed;
+        this.powerUpBlue.x -= this.gameSpeed;
         if(this.powerUptest.x<-10){
             this.respawnPowerup();
             this.spawnPowerupBool = true;
@@ -277,10 +295,6 @@ addGround() {
             this.spawnBluePowerupBool = true;
         } 
 
-        this.background1.tilePositionX += .2;
-        this.backgroundFront.tilePositionX += .4;
-        this.ground1.x-= 6;
-        //this.powerupGroup.body.x -=4;
 
         this.background1.tilePositionX += 0.2;
         this.backgroundFront.tilePositionX += 0.5;
