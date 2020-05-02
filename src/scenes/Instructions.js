@@ -3,14 +3,9 @@ class Instructions extends Phaser.Scene {
         super("instructionsScene");
     }
 
-    preload(){
-
-        this.load.image('menubackground1', './assets/menuBackground.png');
-
-    }
     create(){
         
-        this.starfield = this.add.tileSprite(0, 0, 960, 640, 'menubackground1').setOrigin(0, 0);
+        this.starfield = this.add.tileSprite(0, 0, 960, 640, 'menuimg').setOrigin(0, 0);
 
        // this.add.text(centerX, centerY, 'you dead', endConfig).setOrigin(0.5);
         //this.add.text(centerX, centerY - 64, "it's 2021", endConfig).setOrigin(0.5);
@@ -19,8 +14,26 @@ class Instructions extends Phaser.Scene {
         
     }
     update(){
-        if (Phaser.Input.Keyboard.JustDown(cursors.up)) {
-         this.scene.start('playScene');   
+        if (Phaser.Input.Keyboard.JustDown(keyL)) {
+            his.tweens.add({
+                targets: this.sea,
+                alphaTopLeft: { value: 0, duration: 5000, ease: 'Power1' },
+                alphaTopRight: { value: 0, duration: 5000, ease: 'Power1' },
+                alphaBottomRight: { value: 0, duration: 5000, ease: 'Power1' },
+                alphaBottomLeft: { value: 0, duration: 5000, ease: 'Power1'},//,delay: 5000 },
+     
+                yoyo: false,
+                //loop: -1
+              
+            }); 
+    
+
+         this.groundClock = this.time.delayedCall(5500, () => { //delay call to spawn extra ground
+            this.scene.start('playScene');   
+
+
+                      
+         }, null, this); 
         
     }
 }

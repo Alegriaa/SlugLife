@@ -9,19 +9,7 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
 */
     preload(){
 
-        this.load.image('redbottle', './assets/redbottle.png');
-
-        // Maria, should we move these to preload in Menu, so they are ready in play scene.?
-
-        this.load.image('platform', './assets/platform.png');//placeholder image 
-        this.load.image('platform1', './assets/platform1.png');//placeholder image 
-        this.load.image('platform2', './assets/platform2.png');//placeholder image 
-        this.load.image('platform3', './assets/platform3.png');//placeholder image 
-        this.load.image('background1', './assets/background.png');//placeholder image 
-        this.load.image('backgroundFront', './assets/backgroundFront.png');//placeholder image 
-        this.load.image('bluebottle', './assets/bluebottle.png')
-        //this.load.image('redAnimation', './assets/redAnimation.png');
-        
+     
 
         this.load.spritesheet('virusAnimation', './assets/virus roll.png', { frameWidth: 50, frameHeight: 50, startFrame: 0, endFrame: 4 });
         this.load.spritesheet('slugAnimation','./assets/SlugSprite.png', { frameWidth: 80, frameHeight: 50, startFrame: 0, endFrame: 4 });

@@ -9,6 +9,20 @@ class Menu extends Phaser.Scene {
         this.load.image('menu', './assets/menu.png');
         this.load.image('ground', './assets/ground.png');
         this.load.image('menubackground', './assets/menuBackground.png');
+        this.load.image('menuimg', './assets/menuimg.png');
+        this.load.image('redbottle', './assets/redbottle.png');
+
+        // Maria, should we move these to preload in Menu, so they are ready in play scene.?
+
+        this.load.image('platform', './assets/platform.png');//placeholder image 
+        this.load.image('platform1', './assets/platform1.png');//placeholder image 
+        this.load.image('platform2', './assets/platform2.png');//placeholder image 
+        this.load.image('platform3', './assets/platform3.png');//placeholder image 
+        this.load.image('background1', './assets/background.png');//placeholder image 
+        this.load.image('backgroundFront', './assets/backgroundFront.png');//placeholder image 
+        this.load.image('bluebottle', './assets/bluebottle.png')
+        //this.load.image('redAnimation', './assets/redAnimation.png');
+        
 
     }
 
@@ -46,24 +60,9 @@ class Menu extends Phaser.Scene {
     update() {
 
         if (Phaser.Input.Keyboard.JustDown(keyL)) {
-            this.tweens.add({
-                targets: this.sea,
-                alphaTopLeft: { value: 0, duration: 5000, ease: 'Power1' },
-                alphaTopRight: { value: 0, duration: 5000, ease: 'Power1' },
-                alphaBottomRight: { value: 0, duration: 5000, ease: 'Power1' },
-                alphaBottomLeft: { value: 0, duration: 5000, ease: 'Power1'},//,delay: 5000 },
-     
-                yoyo: false,
-                //loop: -1
-              
-            }); 
-            this.scene.start("playScene");   
-             
-            this.groundClock = this.time.delayedCall(5500, () => { //delay call to spawn extra ground
-
-                      
-            }, null, this); 
             
+            this.scene.start("instructionsScene");   
+             
         }
     }
 
