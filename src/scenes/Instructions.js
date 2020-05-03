@@ -5,21 +5,31 @@ class Instructions extends Phaser.Scene {
 
     preload(){
 
-        this.load.image('menubackground1', './assets/menuBackground.png');
+        //this.load.image('menubackground1', './assets/menuBackground.png');
 
     }
     create(){
         
-        this.starfield = this.add.tileSprite(0, 0, 960, 640, 'menubackground1').setOrigin(0, 0);
+        this.starfield = this.add.tileSprite(0, 0, 960, 640, 'instruc').setOrigin(0, 0);
 
-       // this.add.text(centerX, centerY, 'you dead', endConfig).setOrigin(0.5);
-        //this.add.text(centerX, centerY - 64, "it's 2021", endConfig).setOrigin(0.5);
-        //this.add.text(centerX, centerY + 128, "Press Up Button to Restart", endConfig).setOrigin(0.5);
-        cursors = this.input.keyboard.createCursorKeys();
+      
+        keyL = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.L);
         
     }
     update(){
-        if (Phaser.Input.Keyboard.JustDown(cursors.up)) {
+        if (Phaser.Input.Keyboard.JustDown(keyL)) {
+
+            this.tweens.add({
+                targets: this.sea,
+                alphaTopLeft: { value: 0, duration: 5000, ease: 'Power1' },
+                alphaTopRight: { value: 0, duration: 5000, ease: 'Power1' },
+                alphaBottomRight: { value: 0, duration: 5000, ease: 'Power1' },
+                alphaBottomLeft: { value: 0, duration: 5000, ease: 'Power1'},//,delay: 5000 },
+     
+                yoyo: false,
+                //loop: -1   
+            }); 
+            
          this.scene.start('playScene');   
         
     }

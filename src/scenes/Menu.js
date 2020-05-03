@@ -5,9 +5,13 @@ class Menu extends Phaser.Scene {
 
     preload() {
 
+        
         this.load.image('menu', './assets/menu.png');
         this.load.image('ground', './assets/ground.png');
-        this.load.image('menubackground', './assets/menuBackground.png');
+        this.load.image('menubackground', './assets/menuBlackout.png');
+        this.load.image('title', './assets/title.png');
+        this.load.image('instruc', './assets/MenuInstructions.jpg');
+        
 
     }
 
@@ -25,9 +29,9 @@ class Menu extends Phaser.Scene {
             fixedWidth: 0
 
         }
-        this.starfield = this.add.tileSprite(0, 0, 960, 640, 'menubackground').setOrigin(0, 0);
+        this.starfield = this.add.tileSprite(0, 0, 960, 640, 'title').setOrigin(0, 0);
        //this.starfield1 = this.add.tileSprite(0, 0, 960, 640, 'menu').setOrigin(0, 0);
-       this.sea = this.add.image(960/2, 640/2, 'menu').setAlpha(1);
+       this.sea = this.add.image(960/2, 640/2, 'title').setAlpha(1);
 
 
 
@@ -45,18 +49,11 @@ class Menu extends Phaser.Scene {
     update() {
 
         if (Phaser.Input.Keyboard.JustDown(keyL)) {
-            this.tweens.add({
-                targets: this.sea,
-                alphaTopLeft: { value: 0, duration: 5000, ease: 'Power1' },
-                alphaTopRight: { value: 0, duration: 5000, ease: 'Power1' },
-                alphaBottomRight: { value: 0, duration: 5000, ease: 'Power1' },
-                alphaBottomLeft: { value: 0, duration: 5000, ease: 'Power1'},//,delay: 5000 },
-     
-                yoyo: false,
-                //loop: -1
+            
+            this.scene.start('instructionsScene');  
               
-            }); 
-            this.scene.start("playScene");   
+            } 
+            
              
             this.groundClock = this.time.delayedCall(5500, () => { //delay call to spawn extra ground
 
@@ -66,5 +63,4 @@ class Menu extends Phaser.Scene {
         }
     }
 
-}
 

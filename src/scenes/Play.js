@@ -11,6 +11,8 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
 
         // Maria, should we move these to preload in Menu, so they are ready in play scene.?
         //Brian, this is Nicole, it had an issue before when you load on menu sometimes, we need to have them in play.js
+        //for the final game I think all of the assets should be loaded into preload Menu - Maria
+
 
         this.load.image('platform', './assets/platform.png');//placeholder image 
         this.load.image('platform1', './assets/platform1.png');//placeholder image 
