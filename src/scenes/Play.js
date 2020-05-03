@@ -68,7 +68,7 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
 
         this.background1 = this.add.tileSprite(0,0, 960, 640,'background1').setOrigin(0,0);
         this.backgroundFront = this.add.tileSprite(0,0, 960, 640,'backgroundFront').setOrigin(0,0);
-
+        
         this.virus = new Virus(this, centerX, 0, 'virus');
 
       // this.virus.body.gravity.y = 2600;
@@ -82,7 +82,7 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
         this.background1 = this.add.tileSprite(0,0, 960, 640,'background1').setOrigin(0,0);
         this.backgroundFront = this.add.tileSprite(0,0, 960, 640,'backgroundFront').setOrigin(0,0);
         this.add.text(centerX, centerY - textSpacer * 4, 'SLUG LIFE PLAY SCENE 2', playConfig).setOrigin(0.5);
-
+        this.highway = this.add.tileSprite(0,0, 960, 640,'highway').setOrigin(0,0);
         let scoreConfig = {
             fontFamily: 'Courier',
             fontSize: '28px',
@@ -310,7 +310,7 @@ addGround() {
             this.spawnBluePowerupBool = true;
         } 
 
-
+        this.highway.tilePositionX += 2;
         this.background1.tilePositionX += 0.2;
         this.backgroundFront.tilePositionX += 0.5;
         this.ground1.x-= 6;
