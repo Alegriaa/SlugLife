@@ -27,7 +27,7 @@ let keyL, keyJ;
 
 game.settings = {
     platformSpeed: -200,//this is the number that the platforms and ground are connected to, we could also seperate them into diff values easily
-    smallSpeed: 6,  
+    smallSpeed: 1,  
 }
 
 
