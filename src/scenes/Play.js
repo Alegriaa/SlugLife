@@ -9,8 +9,6 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
 */
     preload(){
 
-        this.load.image('redbottle', './assets/redbottle.png');
-
         // Maria, should we move these to preload in Menu, so they are ready in play scene.?
         //Brian, this is Nicole, it had an issue before when you load on menu sometimes, we need to have them in play.js
 
