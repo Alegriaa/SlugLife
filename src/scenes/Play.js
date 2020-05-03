@@ -12,6 +12,7 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
         this.load.image('redbottle', './assets/redbottle.png');
 
         // Maria, should we move these to preload in Menu, so they are ready in play scene.?
+        //Brian, this is Nicole, it had an issue before when you load on menu sometimes, we need to have them in play.js
 
         this.load.image('platform', './assets/platform.png');//placeholder image 
         this.load.image('platform1', './assets/platform1.png');//placeholder image 
@@ -20,8 +21,7 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
         this.load.image('background1', './assets/background.png');//placeholder image 
         this.load.image('backgroundFront', './assets/backgroundFront.png');//placeholder image 
         this.load.spritesheet('blueAnimation', './assets/blue animation.png',{frameWidth: 25, frameHeight: 50, startFrame: 0, endFrame:4});
-        this.load.spritesheet('redAnimation', './assets/red animation.png', {frameWidth: 25, frameHeight: 50, startFrame: 0, endFrame: 4});
-        this.load.spritesheet('rainbowAnimation','./assets/rainbow animation.png', {frameWidth: 25, frameHeight: 50, startFrame: 0, endFrame: 4});
+        this.load.spritesheet('redAnimation', './assets/redanimation.png', {frameWidth: 25, frameHeight: 50, startFrame: 0, endFrame: 4});
         
 
         this.load.spritesheet('virusAnimation', './assets/virus roll.png', { frameWidth: 50, frameHeight: 50, startFrame: 0, endFrame: 4 });
@@ -187,10 +187,8 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
           this.powerUptest = this.physics.add.sprite (-5, centerY, 'redAnimation',0).setOrigin(0.5);
           //this.powerupGroup.add(this.powerupTest);
          this.powerUpBlue = this.physics.add.sprite (-5, centerY,'blueAnimation',0).setOrigin(0.5);
-         //this.powerUpRainbow = this.physics.add.sprite(-5,centerY, 'rainbowAnimation',0).setOrigin(0.5);
          this.powerUptest.setImmovable();
          this.powerUpBlue.setImmovable();
-         //this.powerUpRainbow.setImmovable();
          
          //Red bottle animation
          this.anims.create({
@@ -211,15 +209,6 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
         });
 
         this.powerUpBlue.anims.play('blueExplode');
-
-       /* this.anims.create({
-            key:'rainbowExplode',
-            repeat: -1,
-            frames: this.anims.generateFrameNumbers('rainbowAnimation',{start: 0, end: 4, first: 0}),
-            frameRate: 30
-        });
-
-        this.powerUpRainbow.anims.play('rainbowExplode'), */
         
        // var bubble = this.animations.add('red');
        // this.powerUptest.animations.play('bubble', 10, true);
