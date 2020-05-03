@@ -9,9 +9,8 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
 */
     preload(){
 
-        this.load.image('redbottle', './assets/redbottle.png');
-
         // Maria, should we move these to preload in Menu, so they are ready in play scene.?
+        //Brian, this is Nicole, it had an issue before when you load on menu sometimes, we need to have them in play.js
 
         this.load.image('platform', './assets/platform.png');//placeholder image 
         this.load.image('platform1', './assets/platform1.png');//placeholder image 
@@ -19,8 +18,8 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
         this.load.image('platform3', './assets/platform3.png');//placeholder image 
         this.load.image('background1', './assets/background.png');//placeholder image 
         this.load.image('backgroundFront', './assets/backgroundFront.png');//placeholder image 
-        this.load.image('bluebottle', './assets/bluebottle.png')
-        //this.load.image('redAnimation', './assets/redAnimation.png');
+        this.load.spritesheet('blueAnimation', './assets/blue animation.png',{frameWidth: 25, frameHeight: 50, startFrame: 0, endFrame:4});
+        this.load.spritesheet('redAnimation', './assets/redanimation.png', {frameWidth: 25, frameHeight: 50, startFrame: 0, endFrame: 4});
         
 
         this.load.spritesheet('virusAnimation', './assets/virus roll.png', { frameWidth: 50, frameHeight: 50, startFrame: 0, endFrame: 4 });
@@ -110,7 +109,7 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
          
       
 
-       //this.slug.anims.play('slug'); 
+       this.slug.anims.play('slug'); 
 
 
         this.virus = new Virus(this, centerX, 0, 'virusAnimation', 0); // we create a virus instance within play.js
@@ -183,34 +182,48 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
         this.physics.add.collider(this.virus, this.powerupGroup);
         
         
-          this.powerUptest = this.physics.add.sprite(-5, centerY, 'redbottle').setOrigin(0.5);
+          this.powerUptest = this.physics.add.sprite (-5, centerY, 'redAnimation',0).setOrigin(0.5);
           //this.powerupGroup.add(this.powerupTest);
-         this.powerUpBlue = this.physics.add.sprite(-5, centerY,'bluebottle').setOrigin(0.5);
+         this.powerUpBlue = this.physics.add.sprite (-5, centerY,'blueAnimation',0).setOrigin(0.5);
          this.powerUptest.setImmovable();
          this.powerUpBlue.setImmovable();
          
-         
+         //Red bottle animation
          this.anims.create({
             key: 'explode',
+            repeat: -1,
             frames: this.anims.generateFrameNumbers('redAnimation', { start: 0, end: 4, first: 0}),
             frameRate: 30
         });
+
+        this.powerUptest.anims.play('explode');
+      
+        // Blue bottle animation
+        this.anims.create({
+            key:'blueExplode',
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('blueAnimation',{start: 0, end: 4, first: 0}),
+            frameRate: 30
+        });
+
+        this.powerUpBlue.anims.play('blueExplode');
         
        // var bubble = this.animations.add('red');
        // this.powerUptest.animations.play('bubble', 10, true);
        this.physics.add.collider(this.virus, this.powerUptest, (a,b)=>{
         
-        this.gameSpeed += 1;
+        this.gameSpeed += 0.2;
         this.respawnPowerup();
         console.log(this.gameSpeed);
         this.playerScore += 1;
+        console.log(this.playerScore);
 
     }, null, this);
 
 
     this.physics.add.collider(this.virus, this.powerUpBlue, (a,b)=>{
         
-        this.gameSpeed += 2;
+        this.gameSpeed += 0.5;
         this.respawnBluePowerup();
         this.playerScore += 2;
         
@@ -331,7 +344,7 @@ addGround() {
             this.ground1.x -= 1;
             
               
-            this.time.delayedCall(3000, () => { this.scene.start('endScene'); });
+            this.time.delayedCall(100, () => { this.scene.start('endScene'); });
           
        
 
