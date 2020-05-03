@@ -8,10 +8,10 @@ class Menu extends Phaser.Scene {
         
         this.load.image('menu', './assets/menu.png');
         this.load.image('ground', './assets/ground.png');
-        this.load.image('menubackground', './assets/menuBlackout.png');
+        this.load.image('menuBlackout', './assets/menuBlackout.png');
         this.load.image('title', './assets/title.png');
         this.load.image('instruc', './assets/MenuInstructions.jpg');
-        
+        this.load.image('highway', './assets/highway.png');
 
     }
 
@@ -31,7 +31,7 @@ class Menu extends Phaser.Scene {
         }
         this.starfield = this.add.tileSprite(0, 0, 960, 640, 'title').setOrigin(0, 0);
        //this.starfield1 = this.add.tileSprite(0, 0, 960, 640, 'menu').setOrigin(0, 0);
-       this.sea = this.add.image(960/2, 640/2, 'title').setAlpha(1);
+       
 
 
 
@@ -55,10 +55,7 @@ class Menu extends Phaser.Scene {
             } 
             
              
-            this.groundClock = this.time.delayedCall(5500, () => { //delay call to spawn extra ground
-
-                      
-            }, null, this); 
+            
             
         }
     }

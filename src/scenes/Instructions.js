@@ -14,23 +14,26 @@ class Instructions extends Phaser.Scene {
 
       
         keyL = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.L);
-        
+        this.sea = this.add.image(960, 640, 'menuBlackout').setScale(2,2).setAlpha(0);
     }
     update(){
         if (Phaser.Input.Keyboard.JustDown(keyL)) {
 
             this.tweens.add({
                 targets: this.sea,
-                alphaTopLeft: { value: 0, duration: 5000, ease: 'Power1' },
-                alphaTopRight: { value: 0, duration: 5000, ease: 'Power1' },
-                alphaBottomRight: { value: 0, duration: 5000, ease: 'Power1' },
-                alphaBottomLeft: { value: 0, duration: 5000, ease: 'Power1'},//,delay: 5000 },
+                alphaTopLeft: { value: 1, duration: 3000, ease: 'Power1' },
+                alphaTopRight: { value: 1, duration: 3000, ease: 'Power1' },
+                alphaBottomRight: { value: 1, duration: 3000, ease: 'Power1' },
+                alphaBottomLeft: { value: 1, duration: 3000, ease: 'Power1'},//,delay: 5000 },
      
                 yoyo: false,
                 //loop: -1   
             }); 
-            
-         this.scene.start('playScene');   
+            this.groundClock = this.time.delayedCall(3000, () => { //delay call to spawn extra ground
+
+                this.scene.start('playScene');         
+            }, null, this);  
+         
         
     }
 }
