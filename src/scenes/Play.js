@@ -187,10 +187,10 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
           this.powerUptest = this.physics.add.sprite (-5, centerY, 'redAnimation',0).setOrigin(0.5);
           //this.powerupGroup.add(this.powerupTest);
          this.powerUpBlue = this.physics.add.sprite (-5, centerY,'blueAnimation',0).setOrigin(0.5);
-         this.powerUpRainbow = this.physics.add.sprite(-5,centerY, 'rainbowAnimation',0).setOrigin(0.5);
+         //this.powerUpRainbow = this.physics.add.sprite(-5,centerY, 'rainbowAnimation',0).setOrigin(0.5);
          this.powerUptest.setImmovable();
          this.powerUpBlue.setImmovable();
-         this.powerUpRainbow.setImmovable();
+         //this.powerUpRainbow.setImmovable();
          
          //Red bottle animation
          this.anims.create({
@@ -212,14 +212,14 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
 
         this.powerUpBlue.anims.play('blueExplode');
 
-        this.anims.create({
+       /* this.anims.create({
             key:'rainbowExplode',
             repeat: -1,
             frames: this.anims.generateFrameNumbers('rainbowAnimation',{start: 0, end: 4, first: 0}),
             frameRate: 30
         });
 
-        this.powerUpRainbow.anims.play('rainbowExplode'),
+        this.powerUpRainbow.anims.play('rainbowExplode'), */
         
        // var bubble = this.animations.add('red');
        // this.powerUptest.animations.play('bubble', 10, true);
