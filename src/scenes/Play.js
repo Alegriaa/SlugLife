@@ -44,10 +44,10 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
 
         }
 
-        playSceneMusic = this.sound.add('PlaySceneMusic');
+        playSceneMusic = this.sound.add('PlaySceneMusic', {volume: 1.1, loop: true});
         playSceneMusic.play();
+        virusBottleSound = this.sound.add('virusBreathes');
 
-        this.add.text(centerX, centerY - textSpacer * 4, 'SLUG LIFE PLAY SCENE 2', playConfig).setOrigin(0.5);
 
         this.gameSpeed = game.settings.smallSpeed;
         this.playerScore = 0;
@@ -84,7 +84,7 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
 
         this.background1 = this.add.tileSprite(0,0, 960, 640,'background1').setOrigin(0,0);
         this.backgroundFront = this.add.tileSprite(0,0, 960, 640,'backgroundFront').setOrigin(0,0);
-        this.add.text(centerX, centerY - textSpacer * 4, 'SLUG LIFE PLAY SCENE 2', playConfig).setOrigin(0.5);
+    
         this.highway = this.add.tileSprite(0,0, 960, 640,'highway').setOrigin(0,0);
         let scoreConfig = {
             fontFamily: 'Courier',
@@ -217,6 +217,7 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
        // this.powerUptest.animations.play('bubble', 10, true);
        this.physics.add.collider(this.virus, this.powerUptest, (a,b)=>{
         
+        this.sound.play('virusBreathes', {volume: 0.1});
         this.gameSpeed += 0.2;
         this.respawnPowerup();
         console.log(this.gameSpeed);
@@ -228,6 +229,7 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
 
     this.physics.add.collider(this.virus, this.powerUpBlue, (a,b)=>{
         
+        this.sound.play('virusBreathes', {volume: 0.1});
         this.gameSpeed += 0.5;
         this.respawnBluePowerup();
         this.playerScore += 2;

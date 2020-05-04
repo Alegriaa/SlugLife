@@ -15,6 +15,9 @@ class Menu extends Phaser.Scene {
         this.load.audio('MenuMusic', './assets/MenuMusic.wav');
         this.load.audio('PlaySceneMusic', './assets/PlaySceneMusic.wav');
         this.load.audio('playTransition', './assets/instructionsPlayTransition.wav');
+        this.load.audio('bottleSound', './assets/bottleSound.wav');
+        this.load.audio('virusBreathes', './assets/virusBreathes3.wav');
+
 
     }
 
