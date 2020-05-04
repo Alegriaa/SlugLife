@@ -38,6 +38,7 @@ let ground = null;
 let cursors = null;
 let menuMusic = null;
 let playSceneMusic = null;
+let virusBottleSound = null;
 const virusWidth = 40;
 const virusHeight = 80;
 //const virusVelocity = 100;
