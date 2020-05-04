@@ -44,6 +44,9 @@ Platforms do not have physics hooked up yet but they ARE all in a ground named p
 
         }
 
+        playSceneMusic = this.sound.add('PlaySceneMusic');
+        playSceneMusic.play();
+
         this.add.text(centerX, centerY - textSpacer * 4, 'SLUG LIFE PLAY SCENE 2', playConfig).setOrigin(0.5);
 
         this.gameSpeed = game.settings.smallSpeed;
@@ -346,7 +349,11 @@ addGround() {
             this.ground1.x -= 1;
             
               
-            this.time.delayedCall(100, () => { this.scene.start('endScene'); });
+            this.time.delayedCall(100, () => { 
+                
+                
+                playSceneMusic.stop();
+                this.scene.start('endScene'); });
           
        
 

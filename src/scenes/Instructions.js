@@ -8,16 +8,27 @@ class Instructions extends Phaser.Scene {
         //this.load.image('menubackground1', './assets/menuBackground.png');
 
     }
+
+    
+
     create(){
+
+        menuMusic = this.sound.add('MenuMusic');
+        menuMusic.play();
         
         this.starfield = this.add.tileSprite(0, 0, 960, 640, 'instruc').setOrigin(0, 0);
 
       
         keyL = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.L);
         this.sea = this.add.image(960, 640, 'menuBlackout').setScale(2,2).setAlpha(0);
+       //this.sceneMusic = this.scene.sound.add('MenuMusic');
+        
     }
     update(){
         if (Phaser.Input.Keyboard.JustDown(keyL)) {
+            menuMusic.stop();
+            this.sound.play('playTransition');
+            
 
             this.tweens.add({
                 targets: this.sea,
@@ -29,9 +40,11 @@ class Instructions extends Phaser.Scene {
                 yoyo: false,
                 //loop: -1   
             }); 
+            
             this.groundClock = this.time.delayedCall(3000, () => { //delay call to spawn extra ground
-
+               
                 this.scene.start('playScene');         
+                
             }, null, this);  
          
         
