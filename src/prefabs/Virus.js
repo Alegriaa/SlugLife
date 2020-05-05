@@ -33,6 +33,7 @@ class Virus extends Phaser.Physics.Arcade.Sprite{     // use phasers sprite
             } 
 
             if (this.jumps > 0 && Phaser.Input.Keyboard.DownDuration(cursors.up, 150)) {
+                
                 this.body.velocity.y = this.JUMP_VELOCITY;
                 this.jumping = true;
 
