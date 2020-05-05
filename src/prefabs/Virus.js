@@ -6,13 +6,14 @@ class Virus extends Phaser.Physics.Arcade.Sprite{     // use phasers sprite
         scene.physics.add.existing(this); 
 
         this.ACCELERATION = 1500;
-        this.MAX_X_VEL = 500;   // pixels/second
+        this.MAX_X_VEL = 500;  
         this.MAX_Y_VEL = 5000;
-        this.DRAG = 600;    // DRAG < ACCELERATION = icy slide
-        this.MAX_JUMPS = 1; // change for double/triple/etc. jumps 🤾‍
+        this.DRAG = 600;    
+        this.MAX_JUMPS = 1; 
         this.JUMP_VELOCITY = -700;
         this.body.gravity.y = 2600;
         this.isDestroyed = false;
+        
         
     }
     create(){

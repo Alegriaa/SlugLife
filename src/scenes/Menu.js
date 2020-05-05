@@ -12,6 +12,8 @@ class Menu extends Phaser.Scene {
         this.load.image('title', './assets/title.png');
         this.load.image('instruc', './assets/MenuInstructions.jpg');
         this.load.image('highway', './assets/highway.png');
+        this.load.image('rave1st', './assets/rave1stBack.png');
+        this.load.image('rave2nd', './assets/rave2ndBack.png');
         this.load.audio('MenuMusic', './assets/MenuMusic.wav');
         this.load.audio('PlaySceneMusic', './assets/PlaySceneMusic.wav');
         this.load.audio('playTransition', './assets/instructionsPlayTransition.wav');
