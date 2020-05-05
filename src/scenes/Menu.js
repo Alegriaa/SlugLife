@@ -2,7 +2,11 @@ class Menu extends Phaser.Scene {
     constructor() {
         super("menuScene");
     }
+/*
+We used a moving camera as well as used randomness to choose the platform textures.
 
+
+*/
     preload() {
 
         
@@ -19,7 +23,8 @@ class Menu extends Phaser.Scene {
         this.load.audio('playTransition', './assets/instructionsPlayTransition.wav');
         this.load.audio('bottleSound', './assets/bottleSound.wav');
         this.load.audio('virusBreathes', './assets/virusBreathes3.wav');
-
+        this.load.image('raveLight1', './assets/raveLight1.png');
+        this.load.image('raveLight2', './assets/raveLight2.png');
 
     }
 

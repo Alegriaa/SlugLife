@@ -4,7 +4,7 @@ class Play extends Phaser.Scene {
     }
     /*
     
-    Platforms do not have physics hooked up yet but they ARE all in a ground named platformGroup and groundGroup
+    
     
     */
     preload() {
@@ -67,7 +67,7 @@ class Play extends Phaser.Scene {
         this.MAX_Y_VEL = 5000;
         this.DRAG = 600;
         this.MAX_JUMPS = 1;
-
+        this.raveLightBool = true;
         this.JUMP_VELOCITY = -700;
 
         // this.scene.physics.world.setBounds(980, 1280)
@@ -95,10 +95,21 @@ class Play extends Phaser.Scene {
         //this.cameras.main.setZoom(centerX);
         // this.game.camera.follow(this.virus);
         this.rave1st = this.add.tileSprite(0, 0, 1920, 1280, 'rave1st');
+
+
+       
+       
+
         this.rave2nd = this.add.tileSprite(0, 0, 1920, 1280, 'rave2nd');
 
         this.background1 = this.add.tileSprite(0, 0, 960, 640, 'background1').setOrigin(0, 0);
+this.raveLight = this.add.tileSprite(centerX-200,620, 250,480,'raveLight1').setOrigin(.5,1);
+        
+
+        this.raveLight1 = this.add.tileSprite(centerX+200,620, 250,480,'raveLight1').setOrigin(.5,1);
+
         this.backgroundFront = this.add.tileSprite(0, 0, 960, 640, 'backgroundFront').setOrigin(0, 0);
+ 
 
         this.highway = this.add.tileSprite(0, 0, 960, 640, 'highway').setOrigin(0, 0);
 
@@ -356,7 +367,8 @@ class Play extends Phaser.Scene {
         if (this.powerUpBlue.x < -10) {
             this.spawnBluePowerupBool = true;
         }
-
+        this.rave1st.tilePositionX += 0;
+        this.rave2nd.tilePositionX += 5;
         this.highway.tilePositionX += 2;
         this.background1.tilePositionX += 0.2;
         this.backgroundFront.tilePositionX += 0.5;
@@ -409,6 +421,43 @@ class Play extends Phaser.Scene {
             });
 
         }
+
+           
+
+
+        if(this.raveLight.angle <= -30){
+            this.raveLightBool = false;
+        }
+        if(this.raveLight.angle >= 30){
+            this.raveLightBool = true;
+        }
+        if(this.raveLightBool){
+
+            this.raveLight.angle -= .5;
+           
+        } else {
+            this.raveLight.angle += .5;
+            
+        }
+
+        if(this.raveLight.angle <= -30){
+            this.raveLightBool = false;
+        }
+        if(this.raveLight.angle >= 30){
+            this.raveLightBool = true;
+            
+        }
+        if(this.raveLightBool){
+
+            this.raveLight1.angle -= .5;
+            
+        } else {
+            this.raveLight1.angle += .5;
+            
+        }
+
+
+
 
     }
 
