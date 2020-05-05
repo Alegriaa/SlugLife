@@ -23,6 +23,7 @@ let config = {
 let game = new Phaser.Game(config);
 
 
+
 let keyL, keyJ;
 
 game.settings = {
@@ -43,4 +44,6 @@ const virusWidth = 40;
 const virusHeight = 80;
 //const virusVelocity = 100;
 const tileSize = 35;
+//var camera = this.cameras.main;
+
 
