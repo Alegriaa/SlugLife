@@ -44,13 +44,7 @@ class Play extends Phaser.Scene {
 
         }
 
-        // this.physics.world.setBounds(0, 0, 1980, 1240);
 
-        //this.scene.physics.world.setBounds(0, 0, 1980, 1240);
-
-
-
-        //this.scene.physic.world.setBounds(0,0, )
 
         playSceneMusic = this.sound.add('PlaySceneMusic', { volume: 1.1, loop: true });
         playSceneMusic.play();
@@ -63,38 +57,22 @@ class Play extends Phaser.Scene {
         // some modifiers for virus
 
 
-
-        // this.scene.physics.world.setBounds(980, 1280)
-
-
-
-
-
-
-
-
         this.spawnPowerupBool = false;
         this.spawnBluePowerupBool = false;
         cursors = this.input.keyboard.createCursorKeys();
 
 
-        this.virus = new Virus(this, centerX, 0, 'virus');
+        this.virus = new Virus(this, centerX , centerY, 'virus');
         this.raveLightBool = true;
+        this.virus.setBounce(0.2);
 
 
 
         cursors = this.input.keyboard.createCursorKeys(); // we create keys to be used
 
 
-        //this.cameras.main.setBounds(0, 0, 980, 1280);
-        //this.cameras.main.setZoom(centerX);
-        // this.game.camera.follow(this.virus);
+        
         this.rave1st = this.add.tileSprite(0, 0, 1920, 1280, 'rave1st');
-
-
-
-
-
         this.rave2nd = this.add.tileSprite(0, 0, 1920, 1280, 'rave2nd');
 
         this.background1 = this.add.tileSprite(0, 0, 960, 640, 'background1').setOrigin(0, 0);
@@ -345,7 +323,8 @@ class Play extends Phaser.Scene {
 
         }
 
-
+        // adjustment so the player can enjoy heaven
+        // but struggle to move further up
 
         if (this.virus.body.y < - 250) {
             this.ACCELERATION = 1500;

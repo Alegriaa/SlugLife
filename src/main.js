@@ -6,13 +6,16 @@ Nicole Figg
 Brian Alegria
 
 Slug Life 
-5/4/20
+5/5/20
 
 We utilized the process of developing this game as a way to cope with the difficult time 
 we are living in. We created all of our own assets, and we produced all of the music within
 the game. We implemented an area above the endless runner, with the intention to have the player 
-be able to just relax in the clouds & enjoy the music while the game still continued. The player 
-could collect points or take a break a vibe in the world we created.
+be able to just relax in the clouds & enjoy the music while the game still continued. We are proud
+of our implementation of our game "heaven", it was challenging to program cameras and changes in 
+gravity since we were working with sprites and not images for our backgrounds which led us to several 
+problems that we had to solve on our own. But, it was worth it, the player can collect points or 
+take a break and vibe in the world we created.
 
 Thank you.
 
