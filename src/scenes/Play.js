@@ -62,13 +62,7 @@ class Play extends Phaser.Scene {
 
         // some modifiers for virus
 
-        this.ACCELERATION = 1500;
-        this.MAX_X_VEL = 500;
-        this.MAX_Y_VEL = 5000;
-        this.DRAG = 600;
-        this.MAX_JUMPS = 1;
-        this.raveLightBool = true;
-        this.JUMP_VELOCITY = -700;
+
 
         // this.scene.physics.world.setBounds(980, 1280)
 
@@ -85,6 +79,7 @@ class Play extends Phaser.Scene {
 
 
         this.virus = new Virus(this, centerX, 0, 'virus');
+        this.raveLightBool = true;
 
 
 
@@ -97,19 +92,19 @@ class Play extends Phaser.Scene {
         this.rave1st = this.add.tileSprite(0, 0, 1920, 1280, 'rave1st');
 
 
-       
-       
+
+
 
         this.rave2nd = this.add.tileSprite(0, 0, 1920, 1280, 'rave2nd');
 
         this.background1 = this.add.tileSprite(0, 0, 960, 640, 'background1').setOrigin(0, 0);
-this.raveLight = this.add.tileSprite(centerX-200,620, 250,480,'raveLight1').setOrigin(.5,1);
-        
+        this.raveLight = this.add.tileSprite(centerX - 200, 620, 250, 480, 'raveLight1').setOrigin(.5, 1);
 
-        this.raveLight1 = this.add.tileSprite(centerX+200,620, 250,480,'raveLight1').setOrigin(.5,1);
+
+        this.raveLight1 = this.add.tileSprite(centerX + 200, 620, 250, 480, 'raveLight1').setOrigin(.5, 1);
 
         this.backgroundFront = this.add.tileSprite(0, 0, 960, 640, 'backgroundFront').setOrigin(0, 0);
- 
+
 
         this.highway = this.add.tileSprite(0, 0, 960, 640, 'highway').setOrigin(0, 0);
 
@@ -344,10 +339,29 @@ this.raveLight = this.add.tileSprite(centerX-200,620, 250,480,'raveLight1').setO
         if (this.virus.body.y < 300) {
             this.cameras.main.startFollow(this.virus);
         }
-        else {
+        else if (this.virus.body.y < - 110 || this.virus.body.y > 300) {
 
             this.cameras.main.stopFollow(this.virus);
 
+        }
+
+
+
+        if (this.virus.body.y < - 250) {
+            this.ACCELERATION = 1500;
+
+            this.MAX_X_VEL = 500;
+            this.MAX_Y_VEL = 300;
+            this.MAX_JUMPS = 1;
+
+            this.JUMP_VELOCITY = -100;
+        } else {
+            this.ACCELERATION = 1500;
+            this.MAX_X_VEL = 500;
+            this.MAX_Y_VEL = 5000;
+            this.MAX_JUMPS = 1;
+
+            this.JUMP_VELOCITY = -700;
         }
 
 
@@ -397,10 +411,6 @@ this.raveLight = this.add.tileSprite(centerX-200,620, 250,480,'raveLight1').setO
             }
         }
 
-        // if(this.virus.body.y > - 100){
-        //     this.virus.body.velocity.y = -100;
-        // }
-
 
         // death state 
 
@@ -422,38 +432,38 @@ this.raveLight = this.add.tileSprite(centerX-200,620, 250,480,'raveLight1').setO
 
         }
 
-           
 
 
-        if(this.raveLight.angle <= -30){
+
+        if (this.raveLight.angle <= -30) {
             this.raveLightBool = false;
         }
-        if(this.raveLight.angle >= 30){
+        if (this.raveLight.angle >= 30) {
             this.raveLightBool = true;
         }
-        if(this.raveLightBool){
+        if (this.raveLightBool) {
 
             this.raveLight.angle -= .5;
-           
+
         } else {
             this.raveLight.angle += .5;
-            
+
         }
 
-        if(this.raveLight.angle <= -30){
+        if (this.raveLight.angle <= -30) {
             this.raveLightBool = false;
         }
-        if(this.raveLight.angle >= 30){
+        if (this.raveLight.angle >= 30) {
             this.raveLightBool = true;
-            
+
         }
-        if(this.raveLightBool){
+        if (this.raveLightBool) {
 
             this.raveLight1.angle -= .5;
-            
+
         } else {
             this.raveLight1.angle += .5;
-            
+
         }
 
 

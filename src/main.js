@@ -1,3 +1,24 @@
+/*
+
+Maria Feudo
+Clemence Briat
+Nicole Figg
+Brian Alegria
+
+Slug Life 
+5/4/20
+
+We utilized the process of developing this game as a way to cope with the difficult time 
+we are living in. We created all of our own assets, and we produced all of the music within
+the game. We implemented an area above the endless runner, with the intention to have the player 
+be able to just relax in the clouds & enjoy the music while the game still continued. The player 
+could collect points or take a break a vibe in the world we created.
+
+Thank you.
+
+
+*/
+
 'use strict'
 
 let config = {
